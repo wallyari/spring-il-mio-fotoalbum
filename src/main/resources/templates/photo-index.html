@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+	<meta charset="UTF-8">
+	 <!-- Bootstrap CSS -->
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
+    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/6.2.0/css/all.min.css}"/> 
+	<title>Pizzeria</title>
+	</head>
+	<body>
+	<header th:insert="~{frag :: header-nav}"></header>	
+	<main>
+	<div class="container p-3 text-center">
+	
+	
+		<div class="d-flex col-12 justify-content-center mb-5">
+		
+			<!-- create -->
+			<a href="photo/create" class="btn btn-danger text-uppercase">
+			<i class="fa-solid fa-plus"></i> Photo</a>
+		</div>
+		<form class="form-inline d-flex mb-5" style="width: 18rem;">
+				<input type="text"
+					   class="form-control mr-sm-2 me-1"  
+					   name="query" 
+					   th:value="${query}">
+				<input type="submit"
+					   class="btn btn-primary" 
+					   value="search">
+ 		</form>	
+		
+	<table th:if="${!photos.isEmpty()}" class="table">
+		<tr>
+			<th scope="col">ID</th>
+		 	<th scope="col">Titolo</th>
+ 			<th scope="col">Descrizione</th>
+ 			<th scope="col">Url</th>
+ 			<th scope="col">Tag</th>
+ 			<th scope="col">Visibile</th>
+ 			<th scope="col">Azioni</th>
+		</tr>
+		<tr th:each="photo : ${photos}" th:object="${photo}">
+			<td th:text="*{id}"></td>
+			<td th:text="*{title}"></td>
+			<td th:text="*{description}"></td>
+			<td th:text="*{url}"></td>
+			<td th:text="*{tag}"></td>
+			<td th:text="*{visible}"></td>
+			<td>
+				<a th:href="@{photo/show/{id}(id=${photo.id})}"class="btn btn-success btn-small text-uppercase"><i class="fa-solid fa-eye"></i></a>			
+				<a th:href="@{photo/edit/{id}(id=${photo.id})}" class="btn btn-primary btn-small text-uppercase"><i class="fa-solid fa-pen-to-square"></i></a>
+				<a th:href="@{photo/delete/{id}(id=${photo.id})}" class="btn btn-danger btn-small text-uppercase"><i class="fa-solid fa-trash"></i></a>
+			</td>
+		</tr>	
+	</table>
+	<h3 th:if="${photos.isEmpty()}">Non ci sono pizze al momento</h3>
+	</div>
+	</main>
+	</body>
+</html>
