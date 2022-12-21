@@ -23,35 +23,20 @@
 				        <li class="nav-item">
 				          <a class="nav-link active" th:href="@{/category}">Categorie</a>         
 				        </li>
-				        					      
-<!-- 				        <li class="nav-item"> -->
-<!-- 				          <a class="nav-link text-danger " th:href="@{/pizza/user/search}">SearchPizze</a>          -->
-<!-- 				        </li>	 -->
-<!-- 				        <li class="nav-item"> -->
-<!-- 				          <a class="nav-link text-primary" th:href="@{/drink/search}">SearchDrinks</a>          -->
-<!-- 				        </li> -->
-<!-- 				        <li class="nav-item"> -->
-<!-- 				          <a class="nav-link text-success" th:href="@{/product/search}">SearchAll</a>          -->
-<!-- 				        </li> -->
-<!-- 				         <li class="nav-item"> -->
-<!--  		       				 <a class="nav-link text-warning" th:href="@{/promotion}">Promo</a> -->
-<!--  		      			</li> -->
-<!--  		      			<li class="nav-item"> -->
-<!--  		       				 <a class="nav-link text-secondary" th:href="@{/ingrediente}">Ingredienti</a> -->
-<!--  		      			</li>					         -->
 			      </ul>    
 			    </div>
-			    	 <div class="d-flex">
- 			
-					<div class="btn btn-primary btn-sm me-2 text-center">
- 				  		<a class="nav-link">login</a>
- 				  	</div>
- 				  	
-	 				<div class="btn btn-secondary btn-sm me-2 text-center">
-	 				 	<a class="nav-link">logout</a>
+			    <div class="d-flex" sec:authorize="isAuthenticated()">
+ 			  	 	  <div class="me-5">
+ 				  	  Logged: <span sec:authentication="name"></span>
+ 				  	  </div>
+					  <div class="btn btn-primary btn-sm me-2 text-center">
+ 				  		<a class="nav-link"  th:href="@{/login}">login</a>
+ 				  	  </div>
+	 				  <div class="btn btn-secondary btn-sm me-2 text-center">
+	 				 	<a class="nav-link" th:href="@{/logout}">logout</a>
 	 				 </div>
- 			  	</div>   
- 			  </div>
+ 			  	</div>  
+ 			</div>
  			  
  			</nav>
  		</header>

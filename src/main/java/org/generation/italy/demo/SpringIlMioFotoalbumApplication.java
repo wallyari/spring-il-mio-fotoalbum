@@ -1,16 +1,22 @@
 package org.generation.italy.demo;
 
- import java.util.ArrayList;
+import java.util.ArrayList;
+
 import java.util.List;
+
 
 import org.generation.italy.demo.pojo.Category;
 import org.generation.italy.demo.pojo.Photo;
+import org.generation.italy.demo.pojo.Role;
+import org.generation.italy.demo.pojo.User;
+import org.generation.italy.demo.service.RoleService;
+import org.generation.italy.demo.service.UserService;
 import org.generation.italy.demo.service.CategoryService;
 import org.generation.italy.demo.service.PhotoService;
- import org.springframework.beans.factory.annotation.Autowired;
- import org.springframework.boot.CommandLineRunner;
- import org.springframework.boot.SpringApplication;
- import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
  @SpringBootApplication
 
@@ -21,7 +27,13 @@ import org.generation.italy.demo.service.PhotoService;
  	
  	@Autowired
  	private CategoryService categoryService;
-
+ 	
+ 	@Autowired
+	private RoleService roleService;
+	
+	@Autowired
+	private UserService userService;
+	
  	public static void main(String[] args) {
  		SpringApplication.run(SpringIlMioFotoalbumApplication.class, args);
  	}
@@ -29,6 +41,15 @@ import org.generation.italy.demo.service.PhotoService;
  	@Override
  	public void run(String... args) throws Exception {
  		
+ 		
+		Role adminRole = new Role("ADMIN");
+		roleService.save(adminRole);
+
+		User adminUser = new User("admin", "{noop}adminp", adminRole);
+		userService.save(adminUser);
+
+ 		
+
  		
  		//-----------------------Category--------------------//
  		Category category1 = new Category("Universal Music");
@@ -65,9 +86,22 @@ import org.generation.italy.demo.service.PhotoService;
  		photoService.save(photo4);
  		photoService.save(photo5);
 
+ 		//System.out.println(photoService.findAllWCategory());
  		
  		
- 		System.out.println(photoService.findAllWCategory());
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
  	}
 
  }
