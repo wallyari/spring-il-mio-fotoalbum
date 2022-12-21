@@ -131,6 +131,10 @@ import jakarta.persistence.Table;
  	 	public void setCategories(List<Category> categories) {
  	 		this.categories = categories;
  	 	}
+ 	 	public void removeCategory(Category c) {
+ 	 		getCategories().remove(c);
+ 	 	}
+ 	 	
  	 	@Override
  	public String toString() {
  		return "(" + getId() + ") " + getTitle() + " - " + getDescription() + " - "
