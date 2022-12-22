@@ -1,8 +1,8 @@
 <template>
   <div class="header">
-  <header th:fragment="header-nav">
+  <header class="mb-5">
     <nav class="navbar navbar-light bg-light justify-content-between font-monospace fw-semibold">
-        <a class="navbar-brand ms-3">Spring ALBUM</a>
+        <a class="navbar-brand ms-3" href="http://localhost:8081/photo">SPRING ALBUM</a>
       <div class="navbar-nav">
         <a class="btn btn-danger btn-sm me-5 fw-semibold text-center" href="http://localhost:8090/photo">Admin Area</a>
       </div>
