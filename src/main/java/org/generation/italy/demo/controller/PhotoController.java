@@ -3,6 +3,7 @@ package org.generation.italy.demo.controller;
 import java.util.List;
 import java.util.Optional;
 import org.generation.italy.demo.pojo.Category;
+import org.generation.italy.demo.pojo.Comment;
 import org.generation.italy.demo.pojo.Photo;
 import org.generation.italy.demo.service.CategoryService;
 import org.generation.italy.demo.service.PhotoService;
@@ -25,11 +26,12 @@ import jakarta.validation.Valid;
  @RequestMapping("/photo")
  public class PhotoController {
 		
-	 @Autowired
-	 private PhotoService photoService;
+	@Autowired
+	private PhotoService photoService;
 	 
-	 @Autowired
+	@Autowired
 	private CategoryService categoryService;
+	 
 
 
  	@GetMapping("")
@@ -51,9 +53,14 @@ import jakarta.validation.Valid;
  		}
 
  		Photo photo = optP.get();
- 		List<Category> categories = photo.getCategories();
  		model.addAttribute("photo", photo);
+ 		
+ 		List<Category> categories = photo.getCategories();
  		model.addAttribute("categories", categories);
+ 		
+ 		List<Comment> comments = photo.getComments();
+ 		model.addAttribute("comments", comments);		
+ 		
  		return "photo-show";
  	}
  	

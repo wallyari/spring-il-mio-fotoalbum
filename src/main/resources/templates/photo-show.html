@@ -21,6 +21,10 @@
 			   		<span class="bg-primary rounded text-white p-1 mb-2 d-inline-block">[[*{tag}]]</span>
 			    <h5>Visibile: <span>[[*{visible}]]</span></h5>
 			    <h5>Categorie: <span th:each="category : ${categories}" th:object="${category}">"[[*{name}]]" </span></h5>
+			    <h5 th:if="${!comments.isEmpty()}">Commenti:</h5>
+					<ul class="list-group list-group-flush">
+ 				  		<li class="list-group-item" th:each="comment : ${comments}" th:object="${comment}">[[*{text}]]</li>
+ 				  	</ul>
 			  </div>
 			</div>
  		</div>

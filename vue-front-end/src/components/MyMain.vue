@@ -34,7 +34,11 @@
                             <button class="btn btn-primary font-monospace fw-semibold">SEND</button>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item bg-light">testo commento</li>
+                            <li class="list-group-item bg-light" 
+                                v-for="comment in photo.comments" 
+                                :key="comment.id">
+                                <span>{{comment.text}}</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -104,7 +108,7 @@
         .then(response => {
             const categories = response.data
             if (categories == null) return
-            const index = this.getPhotoIndexById( photoId);
+            const index = this.getPhotoIndexById(photoId);
             const photo = this.photos[index];
             photo.categories = categories; 
             this.photos.splice(index, 1 , photo);
@@ -113,7 +117,22 @@
         .catch(error => {
         console.log(error)
         })
-    },     
+    }, 
+        getPhotoComments(photoId) {
+        axios.get(API_URL + "/comments/by/photo/" + photoId)
+        .then(response => {
+            const photoComments = response.data
+            if (photoComments == null) return
+            const index = this.getPhotoIndexById(photoId);
+            const photo = this.photos[index];
+            photo.photoComments = photoComments; 
+            this.photos.splice(index, 1 , photo);
+            console.log(this.photos[index]);
+        })
+        .catch(error => {
+        console.log(error)
+        })
+    }, 
 },
 mounted() {
     this.getPhotos();

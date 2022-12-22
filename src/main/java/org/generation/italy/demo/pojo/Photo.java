@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.URL;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
  import jakarta.persistence.Entity;
  import jakarta.persistence.GeneratedValue;
@@ -13,6 +14,7 @@ import jakarta.persistence.Column;
  import jakarta.persistence.Id;
  import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
  import jakarta.validation.constraints.NotEmpty;
  import jakarta.validation.constraints.NotNull;
@@ -49,6 +51,9 @@ import jakarta.persistence.Table;
 	@ManyToMany
  	@JsonIgnore
  	private List<Category> categories;
+	
+	@OneToMany(mappedBy = "photo", cascade = CascadeType.REMOVE)
+ 	private List<Comment> comments;
 
  	public Photo() { }
  	public Photo(String title, String description, String url, String tag, boolean visible, List<Category> categories) {
@@ -135,10 +140,17 @@ import jakarta.persistence.Table;
  	 		getCategories().remove(c);
  	 	}
  	 	
+ 	 	public List<Comment> getComments() {
+ 	 		return comments;
+ 	 	}
+ 	 	public void setComments(List<Comment> comments) {
+ 	 		this.comments = comments;
+ 	 	}
+ 	 	
  	 	@Override
  	public String toString() {
  		return "(" + getId() + ") " + getTitle() + " - " + getDescription() + " - "
- 				   + getTag() + " - " + isVisible() + " - " + getUrl()+ getCategories();
+ 				   + getTag() + " - " + isVisible() + " - " + getUrl()+ getCategories()+ getComments();
  	}
  }
 

@@ -6,12 +6,14 @@ import java.util.List;
 
 
 import org.generation.italy.demo.pojo.Category;
+import org.generation.italy.demo.pojo.Comment;
 import org.generation.italy.demo.pojo.Photo;
 import org.generation.italy.demo.pojo.Role;
 import org.generation.italy.demo.pojo.User;
 import org.generation.italy.demo.service.RoleService;
 import org.generation.italy.demo.service.UserService;
 import org.generation.italy.demo.service.CategoryService;
+import org.generation.italy.demo.service.CommentService;
 import org.generation.italy.demo.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -34,21 +36,22 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private CommentService commentService;
+	
  	public static void main(String[] args) {
  		SpringApplication.run(SpringIlMioFotoalbumApplication.class, args);
  	}
 
  	@Override
  	public void run(String... args) throws Exception {
- 		
+ 	
  		
 		Role adminRole = new Role("ADMIN");
 		roleService.save(adminRole);
 
 		User adminUser = new User("admin", "{noop}adminp", adminRole);
 		userService.save(adminUser);
-
- 		
 
  		
  		//-----------------------Category--------------------//
@@ -89,7 +92,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  		//System.out.println(photoService.findAllWCategory());
  		
  		
+ 		//-----------------------Comment----------------------//
  		
+ 		Comment comment1 = new Comment("Sono fortissimi", photo1);
+ 		Comment comment2 = new Comment("Miti assoluti", photo1);
+ 		Comment comment3 = new Comment("Spaccano!", photo3);
+ 		
+ 		commentService.save(comment1);
+ 		commentService.save(comment2);
+ 		commentService.save(comment3);
  		
  		
  		
